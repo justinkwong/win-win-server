@@ -1,0 +1,46 @@
+<h2>Add Question To Survey</h2>
+
+<%= form_for [@survey, @question] do |f| %>
+	<% if @question.errors.any? %>
+		<h2><%= pluralize(@question.errors.count, "error")  %> prohibited this article from being saved:</h2>
+    	<% @question.errors.full_messages.each do |msg| %>
+      		<li><%= msg %></li>
+    	<% end %>		
+    <% end %>
+	<br/>
+
+	<div>
+	<%= f.label :prompt, "Enter Question Prompt" %><br/>
+	<%= f.text_field :prompt %>
+	</div>
+	<br/>
+	<div>
+	<%= f.label :category %><br/>
+	<%= f.select :category, options_for_select(["multiple choice","slider"])%>
+	</div>
+	<br/>
+
+	<%# Div for multiple choice question- invoke with javascript, will persist for now%>
+	<div>
+		<%= f.fields_for :multiple_choice_attributes, @question.multiple_choice do |t| %>
+		<div>
+			<%= t.label :choice1, "Multiple choice option 1" %><br/>
+			<%= t.text_field :choice1 %>
+		</div>
+		<div>
+			<%= t.label :choice2, "Multiple choice option 2" %><br/>
+			<%= t.text_field :choice2 %>
+		</div>
+		<div>
+			<%= t.label :choice3, "Multiple choice option 3" %><br/>
+			<%= t.text_field :choice3 %>
+		</div>
+		<div>
+			<%= t.label :choice4, "Multiple choice option 4" %><br/>
+			<%= t.text_field :choice4 %>
+		</div>
+		<% end %>
+	</div>
+
+	<%= f.submit %>
+<% end %>

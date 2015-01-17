@@ -1,0 +1,13 @@
+<h1>Welcome to Win-Win</h1>
+<% if !current_user %>
+	<%= link_to "Create Company Profile", new_client_path %><br/>
+	<%= link_to "Create Customer Profile", new_customer_path %><br/>
+	<%= link_to "Login to profile", new_user_session_path %>
+<% else %>
+	<% if current_user.client != nil %>
+		<%= link_to "View Your Profile", client_path(current_user.client) %>
+	<% elsif current_user.customer != nil %>
+		<%= link_to "View Your Profile", customer_path(current_user.customer) %>
+	<% end %>
+	<%= link_to "Sign Out", destroy_user_session_path, method: 'delete' %>
+<% end %>

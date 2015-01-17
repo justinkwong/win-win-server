@@ -1,0 +1,27 @@
+<h1><%= @client.name %>'s Profile</h1>
+
+<% if current_user %> 
+	<% if current_user.customer != nil %>
+		<%= link_to "Add to favorite", client_favorite_path(@client.id) %>
+	<% elsif current_user.client == @client %>
+		<%= link_to "View Messages", client_messages_path(@client.id) %>
+	<% end %>
+<% end %>
+<br/>
+<%= link_to "Create new survey", new_client_survey_path(@client) %>
+<br/>
+<%# IDEALLY THIS WOULD BE SET WHEN NEW REVIEWS ARE MADE%>
+Rating: <%= @client.rating %>
+<h3>Customer Reviews</h3>
+<table>
+<th>Reviewer</th>
+<th>Review Detail</th>
+<th>Rating</th>
+<% @client.reviews.each do |review| %>
+	<tr>
+	<td><%= review.customer.first_name %></td>
+	<td><%= review.detail %></td>
+	<td><%= review.rating %></td>
+	</tr>
+<% end %>
+</table>

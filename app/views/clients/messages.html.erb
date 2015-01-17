@@ -1,0 +1,11 @@
+<% if current_user.client == @client %>
+	<h1>Your Company Messages</h1>
+	<% @threads.each do |thread| %>
+		<h4>Conversation with <%= thread.customer.first_name %></h4>
+		<% thread.messages.each do |msg| %>
+			<%= msg.body %><br/>
+		<% end %>
+	<% end %>
+<% else %>
+	<h2>You are not authorized to view this page</h2>
+<% end %>

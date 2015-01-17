@@ -1,0 +1,8 @@
+<h1><%= @customer.first_name + " " + @customer.last_name %></h1>
+
+<h3>Favorites: </h3>
+<ul>
+<% @customer.favorites.each do |fave| %>
+	<li><%= fave.client.name %></li>
+<% end %> 
+</ul>
