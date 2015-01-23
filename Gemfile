@@ -38,7 +38,7 @@ gem 'spring',        group: :development
 
 #User registration
 gem 'devise'
-gem 'pg'
+
 gem 'mysql2'
 
 gem 'sinatra'
