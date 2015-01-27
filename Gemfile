@@ -38,6 +38,7 @@ gem 'spring',        group: :development
 
 #User registration
 gem 'devise'
+gem 'rails_12factor', group: :production
 
 #gem 'mysql2'
 gem 'pg'
