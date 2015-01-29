@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       resources :clients do
         get :reviews
         get :survey
+        get :favorited
         post :survey_response
       end
       resources :message_threads, only: [:show]

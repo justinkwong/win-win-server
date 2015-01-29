@@ -23,6 +23,12 @@ module Api
 			@survey = client.get_primary
 		end
 
+		#GET api/clients/client_id/favorited
+		def favorited 
+			client = Client.find(params[:client_id])
+			@favorites = client.favorites
+		end
+
 		private
 
 		def client_params
