@@ -42,7 +42,9 @@ Rails.application.routes.draw do
         get :reviews
         get :survey
         get :favorited
+        get :reward_profiles
         post :survey_response
+        post :new_reward
       end
       resources :message_threads, only: [:show]
       

@@ -8,6 +8,7 @@ class Client < ActiveRecord::Base
 	has_many :message_threads
 	has_many :surveys
 	has_many :favorites
+	has_many :reward_profiles
 
 	accepts_nested_attributes_for :user
 

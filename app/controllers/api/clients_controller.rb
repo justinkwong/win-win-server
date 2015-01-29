@@ -7,16 +7,6 @@ module Api
 			@reviews = client.reviews
 		end
 
-		#POST: api/clients/client_id/survey_response
-		#TODO: define response model
-		def survey_response 
-			client = Client.find(params[:client_id])
-			#TODO: Create survey response instance from params
-			#Use model functions to keep controller skinny
-			#Survey -> suvery_responses
-			#Question -> question_responses
-		end
-
 		#GET api/clients/client_id/survey
 		def survey
 			client = Client.find(params[:client_id])
@@ -29,6 +19,31 @@ module Api
 			@favorites = client.favorites
 		end
 
+		#GET: api/clients/client_id/reward_profiles
+		def reward_profiles
+			client = Client.find(params[:client_id])
+			@rewards = client.reward_profiles
+		end
+
+		#POST: api/clients/client_id/survey_response
+		def survey_response 
+			client = Client.find(params[:client_id])
+			#TODO: Create survey response instance from params
+			#Use model functions to keep controller skinny
+			#Survey -> suvery_responses
+			#Question -> question_responses
+		end
+
+		#POST: api/clients/client_id/new_reward
+		def new_reward
+			client = Client.find(params[:client_id])
+			if client.reward_profiles.create(rewards_params)
+				render json: client.reward_profiles, status: 201
+			else
+				render json: {errors: "invalid parameters"}, status: 403
+			end
+		end
+
 		private
 
 		def client_params
@@ -39,6 +54,10 @@ module Api
 														  :password_confirmation
 														]	
 														)
+		end
+
+		def rewards_params
+			params.require(:reward).permit(:name, :tier, :points, :max_redeem, :redeem_message)
 		end
 
 		def query_params

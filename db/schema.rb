@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141227201558) do
+ActiveRecord::Schema.define(version: 20150129010333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,19 @@ ActiveRecord::Schema.define(version: 20141227201558) do
 
   add_index "reviews", ["client_id"], name: "index_reviews_on_client_id", using: :btree
   add_index "reviews", ["customer_id"], name: "index_reviews_on_customer_id", using: :btree
+
+  create_table "reward_profiles", force: true do |t|
+    t.string   "name",           null: false
+    t.integer  "tier",           null: false
+    t.integer  "points",         null: false
+    t.integer  "max_redeem",     null: false
+    t.text     "redeem_message"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reward_profiles", ["client_id"], name: "index_reward_profiles_on_client_id", using: :btree
 
   create_table "rewards", force: true do |t|
     t.integer  "current_points",  default: 0
